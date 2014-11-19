@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Logger test</title>
+	<script type="text/javascript" src="Logger.js"></script>
+	<style type="text/css">
+		#messanger {
+			margin: 0px;
+			margin-bottom: 1px;
+			/*
+			position: fixed;
+			bottom: 0px;
+			*/
+			width: 450px;
+			border: dashed 3px gray;
+			border-radius: 5px;
+			
+			height: 100px;
+			/*max-height: 100%;*/
+
+			text-align: left;
+			padding-left: 5px;
+
+			overflow-y: scroll;
+
+			background-color: lightgray;
+
+			/* transition effect */
+			/* For Safari 3.1 to 6.0 */
+			-webkit-transition: all .5s ease;
+			-moz-transition: all .5s ease;
+			transition: all .5s ease;
+		}
+
+		#messanger :hover {
+			height: 100%;
+		}
+
+		#messanger span {
+			border: none;
+			border-radius: 5px;
+			padding: 0px;
+			margin: 0px;
+			padding-left: 3px;
+			padding-right: 3px;
+		}
+
+		#messanger span time {
+			font-weight: bold;
+		}
+
+		#messanger span.Warning {
+			background-color: yellow;
+		}
+
+		#messanger span.Info {
+			background-color: lightblue;
+		}
+
+		#messanger span.Error {
+			background-color: tomato;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<button id="errorButton">New Error Message</button>
+		<button id="infoButton">New Info Message</button>
+		<button id="warningButton">New Warning Message</button>
+		<button id="clearButton">Clear Messages</button>
+	</div>
+	<div id="messanger">
+		<!-- here will be populated all log messages -->
+	</div>
+	<script type="text/javascript">
+		(function () {
+			var logContainer = document.getElementById("messanger");
+
+			document.getElementById('errorButton').onclick = function () {
+				var errorMessage = prompt("Please enter the Error message.");
+				if(errorMessage) Messanger.log(MessageTypes.Error, errorMessage, logContainer);
+			}
+
+			document.getElementById('infoButton').onclick = function () {
+				var infoMessage = prompt("Please enter text for Info message.");
+				if(infoMessage) Messanger.log(MessageTypes.Info, infoMessage, logContainer);
+			}
+
+			document.getElementById('warningButton').onclick = function () {
+				var warningMessage = prompt("Please enter text for Warning message.");
+				if(warningMessage) Messanger.log(MessageTypes.Warning, warningMessage, logContainer);
+			}
+
+			document.getElementById('clearButton').onclick = function () {
+				Messanger.clear(logContainer);
+			}
+		})();
+	</script>
+</body>
+</html>
